@@ -8,10 +8,22 @@ datasource db {
 }
 
 model users {
-  id          String @unique @default(uuid())
+  id          String   @unique @default(uuid())
   name        String
-  lastName    String
-  email       String @unique
-  password    String @unique
-  phoneNumber String
+  lastName    String   @map("last_name")
+  email       String   @unique
+  password    String   @unique
+  phoneNumber String   @map("phone_number")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+}
+
+model companies {
+  id          String   @unique @default(uuid())
+  name        String
+  email       String   @unique
+  phoneNumber String   @map("phone_number")
+  address     String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
 }

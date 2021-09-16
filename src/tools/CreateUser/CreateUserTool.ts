@@ -1,9 +1,8 @@
 import { User } from "../../entities/User";
-import { MailProvider } from "../../providers/MailProvider";
 import { UserRepository } from "../../repositories/UsersRepository";
 import { CreateUserDTO } from "./CreateUserDTO";
 
-export class CreateUserService {
+export class CreateUserTool {
 
   constructor (
     private userRepository: UserRepository,
@@ -17,15 +16,15 @@ export class CreateUserService {
      * Check if user exists by email
      */
     if (userAlreadyExists) {
-      throw new Error('User already exists.');
+      throw {
+        email: 'There is another account using this email.'
+      };
     }
-
 
     /**
      * Save user
      */
-    const user = new User(data);
-    await this.userRepository.save(user);
+    return await this.userRepository.save(new User(data));
 
   }
 

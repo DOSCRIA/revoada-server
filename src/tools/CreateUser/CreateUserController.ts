@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { CreateUserService } from "./CreateUserService";
+import { CreateUserTool } from "./CreateUserTool";
 
 export class CreateUserController {
 
   constructor (
-    private createUserService: CreateUserService
+    private createUserTool: CreateUserTool
   ){}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -19,7 +19,7 @@ export class CreateUserController {
 
     try {
 
-      await this.createUserService.execute({
+      const userData = await this.createUserTool.execute({
         name,
         lastName,
         email, 
@@ -27,13 +27,11 @@ export class CreateUserController {
         phoneNumber
       });
 
-      return response.status(201).send();
+      return response.status(201).json(userData);
 
     } catch (err) {
 
-      return response.status(400).json({
-        message: err.message || 'Unexpected error.'
-      })
+      return response.status(400).json(err || 'Unexpected error.')
       
     }
 

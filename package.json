@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "echo Generating Prisma client... && npx prisma generate && echo Starting REST API... && npx tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "start": "echo Starting the server with web sockets and REST API... && npx tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "generate": "echo Generating Prisma client... && npx prisma generate",
     "studio": "npx prisma studio"
   },
   "devDependencies": {
@@ -15,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "nodemailer": "^6.6.3",
+    "socket.io": "^4.2.0",
     "ts-node-dev": "^1.1.8",
     "uuid": "^8.3.2"
   }

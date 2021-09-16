@@ -1,4 +1,9 @@
 {
     "editor.tabSize": 2,
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+
+    "[prisma]": {
+        "editor.formatOnSave": true
+    },
+    
 }

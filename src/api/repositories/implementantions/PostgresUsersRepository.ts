@@ -1,11 +1,18 @@
 import { User } from "../../entities/User";
-import { UserRepository } from "../UsersRepository";
+import { UserRepository, Password } from "../UsersRepository";
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import bcrypt, { compareSync } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 export class PostgresUsersRepository implements UserRepository {
+
+  verifyPasswordMatches({ 
+    password,
+    hashPassword
+  }: Password): boolean {
+    return compareSync(password, hashPassword);
+  }
 
   async findByEmail(email: string): Promise<User> {
     return await prisma.users.findUnique({

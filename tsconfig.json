@@ -6,7 +6,8 @@
     "lib": ["esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./src/@types"]
   },
   "include": [
     "src/**/*.ts"

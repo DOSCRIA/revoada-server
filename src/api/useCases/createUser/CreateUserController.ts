@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { CreateUserTool } from "./CreateUserTool";
+import { CreateUserUseCase } from "./CreateUserUseCase";
 
 export class CreateUserController {
 
   constructor (
-    private createUserTool: CreateUserTool
+    private createUserUseCase: CreateUserUseCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -19,7 +19,7 @@ export class CreateUserController {
 
     try {
 
-      const userData = await this.createUserTool.execute({
+      const userData = await this.createUserUseCase.execute({
         name,
         lastName,
         email, 

@@ -22,7 +22,9 @@ export function ensureAuthenticated (
   /**
    * Check if token was sent
    */
-  if (!authToken) return response.status(401).end();
+  if (!authToken) return response.status(401).json({
+    token: 'Token is missing'
+  });
 
   try {
 
@@ -34,13 +36,21 @@ export function ensureAuthenticated (
     /**
      * Decode token
      */
-    const { sub } = verify(token, process.env.JWT_MD5_TOKEN);
+    const auth = JSON.stringify(verify(token, process.env.JWT_MD5_TOKEN));
 
     /**
-     * Put user data in the request
+     * Authentication props
+     */
+    const authProps = JSON.parse(auth);
+
+    /**
+     * Put user data in the request Auth object
      */
     request.auth = {
-      id: sub,
+      email: authProps.email,
+      iat: authProps.iat,
+      exp: authProps.exp,
+      sub: authProps.sub,
     }
     
     /**
@@ -53,7 +63,9 @@ export function ensureAuthenticated (
     /**
      * Unauthorized
      */
-    return response.status(401).end();
+    return response.status(401).json({
+      message: 'Token invalid'
+    });
 
   }
 

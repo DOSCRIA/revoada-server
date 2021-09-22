@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { app } from "./api/app";
+import { app } from "./api";
 import { router } from "./api/routes";
 import http from 'http';
 

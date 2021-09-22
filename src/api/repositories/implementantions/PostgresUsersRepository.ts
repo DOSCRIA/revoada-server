@@ -1,9 +1,7 @@
-import { User } from "../../entities/User";
-import { UserRepository, Password } from "../UsersRepository";
-import { PrismaClient } from '@prisma/client';
+import { User, Password } from "../../entities/User";
+import { UserRepository } from "../UsersRepository";
 import bcrypt, { compareSync } from 'bcryptjs';
-
-const prisma = new PrismaClient();
+import { client } from "../../prisma/client";
 
 export class PostgresUsersRepository implements UserRepository {
 
@@ -15,7 +13,7 @@ export class PostgresUsersRepository implements UserRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await prisma.users.findUnique({
+    return await client.users.findUnique({
       where: {
         email
       }
@@ -32,7 +30,7 @@ export class PostgresUsersRepository implements UserRepository {
 
     const passwordHash = bcrypt.hashSync(password, 12);
 
-    return await prisma.users.create({
+    return await client.users.create({
       data: {
         name,
         email,

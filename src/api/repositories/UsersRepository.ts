@@ -1,9 +1,4 @@
-import { User } from "../entities/User";
-
-export interface Password {
-  password: string;
-  hashPassword: string;
-}
+import { User, Password } from "../entities/User";
 
 export interface UserRepository {
   findByEmail(email: string): Promise<User>;

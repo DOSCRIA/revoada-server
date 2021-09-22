@@ -2,7 +2,7 @@ import { User } from "../../entities/User";
 import { UserRepository } from "../../repositories/UsersRepository";
 import { CreateUserDTO } from "./CreateUserDTO";
 
-export class CreateUserTool {
+export class CreateUserUseCase {
 
   constructor (
     private userRepository: UserRepository,
@@ -15,11 +15,8 @@ export class CreateUserTool {
     /**
      * Check if user exists by email
      */
-    if (userAlreadyExists) {
-      throw {
-        email: 'There is another account using this email.'
-      };
-    }
+    if (userAlreadyExists) throw new Error(JSON.stringify({ email: 'There is another account using this email.' }));
+
 
     /**
      * Save user

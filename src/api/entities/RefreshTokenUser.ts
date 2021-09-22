@@ -1,20 +1,13 @@
 import { v4 } from "uuid";
-export interface Password {
-  password: string;
-  hashPassword: string;
-}
 
-export class User {
+export class RefreshTokenUser {
 
   public readonly id: string;
 
-  public name: string;
-  public lastName: string;
-  public email: string;
-  public password: string;
-  public phoneNumber: string;
+  public userId: string;
+  public expiresIn: number;
 
-  constructor (props: Omit<User, 'id'>, id?: string) {
+  constructor (props: Omit<RefreshTokenUser, 'id'>, id?: string) {
 
     /**
      * add to props object to THIS variable, example: props.name > this.name

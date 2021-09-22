@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { AuthenticateUserTool } from "./AuthenticateUserTool";
+import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 export class AuthenticateUserController {
 
   constructor (
-    private authenticateUserTool: AuthenticateUserTool
+    private authenticateUserUseCase: AuthenticateUserUseCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -16,7 +16,7 @@ export class AuthenticateUserController {
 
     try {
 
-      const userData = await this.authenticateUserTool.execute({
+      const userData = await this.authenticateUserUseCase.execute({
         email, 
         password
       });

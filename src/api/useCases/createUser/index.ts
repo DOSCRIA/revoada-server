@@ -1,15 +1,15 @@
 import { CreateUserController } from "./CreateUserController";
 import { PostgresUsersRepository } from "../../repositories/implementantions/PostgresUsersRepository";
-import { CreateUserTool } from "./CreateUserTool";
+import { CreateUserUseCase } from "./CreateUserUseCase";
 
 const postgresUsersRepository = new PostgresUsersRepository();
 
-const createUserTool = new CreateUserTool(
+const createUserUseCase = new CreateUserUseCase(
   postgresUsersRepository,
 );
 
 const createUserController = new CreateUserController(
-  createUserTool
+  createUserUseCase
 );
 
-export { CreateUserTool, createUserController };
+export { CreateUserUseCase, createUserController };

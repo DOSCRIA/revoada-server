@@ -36,25 +36,30 @@ export function ensureAuthenticated (
     /**
      * Decode token
      */
-    const auth = JSON.stringify(verify(token, process.env.JWT_MD5_TOKEN));
+    const auth = verify(token, process.env.JWT_MD5_TOKEN);
 
     /**
      * Authentication props
      */
-    const authProps = JSON.parse(auth);
+    const {
+      email,
+      iat,
+      exp, 
+      sub
+    } = typeof auth === 'string' ?  JSON.parse(auth) : auth;
 
     /**
      * Put user data in the request Auth object
      */
     request.auth = {
-      email: authProps.email,
-      iat: authProps.iat,
-      exp: authProps.exp,
-      sub: authProps.sub,
-    }
+      email,
+      iat,
+      exp,
+      sub,
+    };
     
     /**
-     * Continue the flow
+     * Continues the flow
      */
     return next();
 

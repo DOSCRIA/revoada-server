@@ -16,7 +16,7 @@ export class GenerateTokenProvider {
      */
     const jwtOptions = {
       subject: id,
-      expiresIn: '20s'
+      expiresIn: '1d'
     }
 
     /**

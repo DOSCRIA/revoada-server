@@ -9,7 +9,7 @@ export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepos
    * @param id
    */
   async remove(userId: string): Promise<void> {
-    await client.refreshToken.deleteMany({
+    await client.refreshTokens.deleteMany({
       where: {
         userId
       }
@@ -22,7 +22,7 @@ export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepos
    * @returns refresh token data
    */
   async findById(id: string): Promise<RefreshTokenUser> {
-    return await client.refreshToken.findFirst({
+    return await client.refreshTokens.findFirst({
       where: {
         id
       }

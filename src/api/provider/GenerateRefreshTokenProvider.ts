@@ -10,8 +10,8 @@ export class GenerateRefreshTokenProvider {
 
   async execute (userId: string): Promise<RefreshTokenUser> {
      try {
-      const expiresIn = dayjs().add(15, 'second').unix();
-      const generateRefreshToken = await client.refreshToken.create({
+      const expiresIn = dayjs().add(60, 'days').unix();
+      const generateRefreshToken = await client.refreshTokens.create({
         data: {
           userId,
           expiresIn

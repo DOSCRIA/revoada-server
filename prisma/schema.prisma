@@ -1,10 +1,10 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Users {
@@ -17,7 +17,7 @@ model Users {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
-  RefreshToken RefreshToken?
+  RefreshToken RefreshTokens?
 
   @@map("users")
 }
@@ -25,7 +25,7 @@ model Users {
 model Companies {
   id          String   @id @default(uuid())
   name        String
-  email       String   @unique
+  email       String
   phoneNumber String   @map("phone_number")
   address     String
   createdAt   DateTime @default(now()) @map("created_at")
@@ -34,7 +34,7 @@ model Companies {
   @@map("companies")
 }
 
-model RefreshToken {
+model RefreshTokens {
   id        String   @id @default(uuid())
   expiresIn Int
   user      Users    @relation(fields: [userId], references: [id])
@@ -42,5 +42,5 @@ model RefreshToken {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
-  @@map("refresh_token")
+  @@map("refresh_tokens")
 }

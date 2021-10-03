@@ -17,5 +17,5 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 });
 
-server.listen(port, () => console.log(`Listening REST API on port: ${port}`));
+server.listen(port, () => console.log(`🔥🔥🔥 Server listening on port: ${port}`));
 app.use(router);

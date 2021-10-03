@@ -6,7 +6,7 @@ import { refreshTokenUserController } from "../useCases/refreshTokenUser";
 
 const router = Router();
 
-router.post('/teste', async (request, response) => {
+router.post('/teste', ensureAuthenticated, async (request, response) => {
   return await refreshTokenUserController.handle(request, response);
 });
 

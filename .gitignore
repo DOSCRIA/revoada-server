@@ -4,4 +4,4 @@
 
 node_modules
 prisma/docs/
-prisma/client/
+prisma/client/generated

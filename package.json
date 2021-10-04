@@ -4,8 +4,14 @@
     "studio": "npx prisma studio"
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
     "@types/express": "^4.17.13",
     "@types/uuid": "^8.3.1",
+    "babel-plugin-module-resolver": "^4.1.0",
     "prisma": "^3.1.1",
     "prisma-docs-generator": "^0.5.0",
     "prisma-erd-generator": "^0.3.6",

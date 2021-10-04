@@ -1,5 +1,5 @@
 import { RefreshTokenUser } from "../../entities/RefreshTokenUser";
-import { client } from "../../../../prisma/client";
+import { prisma } from "../../../../prisma/client";
 import { RefreshTokenUserRepository } from "../RefreshTokenUserRepository";
 
 export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepository {
@@ -9,7 +9,7 @@ export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepos
    * @param id
    */
   async remove(userId: string): Promise<void> {
-    await client.refreshTokens.deleteMany({
+    await prisma.refreshTokens.deleteMany({
       where: {
         userId
       }
@@ -22,7 +22,7 @@ export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepos
    * @returns refresh token data
    */
   async findById(id: string): Promise<RefreshTokenUser> {
-    return await client.refreshTokens.findFirst({
+    return await prisma.refreshTokens.findFirst({
       where: {
         id
       }

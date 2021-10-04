@@ -59,8 +59,8 @@ Prisma.AnyNull = 'AnyNull'
 
 // folder where the generated client is found
 const dirname = findSync(process.cwd(), [
-  "prisma\\client\\generated",
-  "client\\generated",
+  "prisma/client/generated",
+  "client/generated",
 ], ['d'], ['d'], 1)[0] || __dirname
 
 /**
@@ -168,7 +168,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\PICHAU\\Desktop\\Projetos\\revoada-server\\prisma\\client\\generated",
+      "value": "/Users/eris/Desktop/projetos/revoada-server/prisma/client/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -179,10 +179,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "..\\..\\..\\.env",
-    "schemaEnvPath": "..\\..\\..\\.env"
+    "rootEnvPath": "../../../.env",
+    "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "..\\..",
+  "relativePath": "../..",
   "clientVersion": "3.1.1",
   "engineVersion": "c22652b7e418506fab23052d569b85d3aec4883f",
   "datasourceNames": [
@@ -213,11 +213,11 @@ Object.assign(exports, Prisma)
  * In order to make `ncc` and `@vercel/nft` happy.
  * The process.cwd() annotation is only needed for https://github.com/vercel/vercel/tree/master/packages/now-next
 **/
-path.join(__dirname, 'query_engine-windows.dll.node');
-path.join(process.cwd(), './prisma\client\generated\query_engine-windows.dll.node')
+path.join(__dirname, 'libquery_engine-darwin.dylib.node');
+path.join(process.cwd(), './prisma/client/generated/libquery_engine-darwin.dylib.node')
 /**
  * Annotation for `@vercel/nft`
  * The process.cwd() annotation is only needed for https://github.com/vercel/vercel/tree/master/packages/now-next
 **/
 path.join(__dirname, 'schema.prisma');
-path.join(process.cwd(), './prisma\client\generated\schema.prisma');
+path.join(process.cwd(), './prisma/client/generated/schema.prisma');

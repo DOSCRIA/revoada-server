@@ -14,8 +14,8 @@ generator docs {
 }
 
 generator erd {
-  provider = "prisma-erd-generator"
-  output = "../ERD.svg"
+  provider = "node node_modules/prisma-erd-generator"
+  output = "schema/prisma-entity-relationship-diagram.svg"
 }
 
 model Users {

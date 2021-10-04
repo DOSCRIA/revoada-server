@@ -24,15 +24,12 @@ model Users {
   updatedAt   DateTime @default(now()) @map("updated_at")
 
   RefreshToken RefreshTokens?
-  UsersTickets UsersTickets?
+  usersTickets UsersTickets[]
 
   @@map("users")
 }
 
 model Companies {
-  Tickets Tickets?
-  Events  Events?
-
   id          String   @id @default(uuid())
   name        String
   email       String
@@ -40,41 +37,54 @@ model Companies {
   address     String
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
+  events      Events[]
 
   @@map("companies")
 }
 
-model RefreshTokens {
-  user Users @relation(fields: [userId], references: [id])
+model Events {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  companyId   String
+  eventDate   DateTime @default(now()) @map("event_date")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
 
+  company Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  tickets Tickets[]
+
+  @@map("events")
+}
+
+model RefreshTokens {
   id        String   @id @default(uuid())
   expiresIn Int      @default(0) @map("expires_in")
   userId    String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
+  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("refresh_tokens")
 }
 
 model Tickets {
-  company Companies @relation(fields: [companyId], references: [id])
-
   id            String   @id @default(uuid())
   price         Decimal
-  companyId     String
   purchaseLimit Int
   deadline      DateTime @default(now())
+  eventId       String
 
-  UsersTickets UsersTickets?
-  Events       Events?
-
+  events       Events[]       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  usersTickets UsersTickets[]
 
   @@map("tickets")
 }
 
 model UsersTickets {
-  ticket Tickets @relation(fields: [ticketId], references: [id])
-  user   Users   @relation(fields: [userId], references: [id])
+  ticket Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   id       String @id @default(uuid())
   userId   String
@@ -82,20 +92,4 @@ model UsersTickets {
   quantity Int
 
   @@map("users_tickets")
-}
-
-model Events {
-  ticket  Tickets   @relation(fields: [ticketId], references: [id])
-  company Companies @relation(fields: [companyId], references: [id])
-
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  companyId   String
-  ticketId    String   @map("ticket_id")
-  eventDate   DateTime @default(now()) @map("event_date")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @map("updated_at")
-
-  @@map("events")
 }

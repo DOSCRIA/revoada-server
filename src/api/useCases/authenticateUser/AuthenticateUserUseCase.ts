@@ -22,7 +22,7 @@ export class AuthenticateUserUseCase {
     /**
      * Check if user exists by email
      */
-    if (!user) throw new Error(JSON.stringify({ email_password: 'Email or password incorrect' }));
+    if (!user) throw new Error(JSON.stringify({ emailPassword: 'Email or password incorrect' }));
 
     const passwordMatch = this.userRepository.verifyPasswordMatches({
       password: data.password,
@@ -32,7 +32,7 @@ export class AuthenticateUserUseCase {
     /**
      * Check if password is correct
      */
-     if (!passwordMatch) throw new Error(JSON.stringify({ email_password: 'Email or password incorrect' }));
+     if (!passwordMatch) throw new Error(JSON.stringify({ emailPassword: 'Email or password incorrect' }));
 
     /**
      * Generate JWT

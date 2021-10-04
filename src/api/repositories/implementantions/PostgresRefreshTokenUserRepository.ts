@@ -1,5 +1,5 @@
 import { RefreshTokenUser } from "../../entities/RefreshTokenUser";
-import { client } from "../../prisma/client";
+import { client } from "../../../../prisma/client";
 import { RefreshTokenUserRepository } from "../RefreshTokenUserRepository";
 
 export class PostgresRefreshTokenUserRepository implements RefreshTokenUserRepository {

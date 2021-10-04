@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { RefreshTokenUser } from "../entities/RefreshTokenUser";
-import { client } from "../prisma/client";
+import { client } from "../../../prisma/client";
 
 export interface GenerateRefreshTokenProviderProps {
   execute: (userId: string) => Promise<RefreshTokenUser>;

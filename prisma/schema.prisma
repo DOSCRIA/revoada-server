@@ -5,6 +5,17 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output   = "client/generated"
+}
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output   = "docs"
+}
+
+generator erd {
+  provider = "node node_modules/prisma-erd-generator"
+  output = "schema/prisma-entity-relationship-diagram.svg"
 }
 
 model Users {
@@ -18,11 +29,15 @@ model Users {
   updatedAt   DateTime @default(now()) @map("updated_at")
 
   RefreshToken RefreshTokens?
+  UsersTickets UsersTickets?
 
   @@map("users")
 }
 
 model Companies {
+  Tickets Tickets?
+  Events  Events?
+
   id          String   @id @default(uuid())
   name        String
   email       String
@@ -35,12 +50,57 @@ model Companies {
 }
 
 model RefreshTokens {
+  user Users @relation(fields: [userId], references: [id])
+
   id        String   @id @default(uuid())
-  expiresIn Int
-  user      Users    @relation(fields: [userId], references: [id])
+  expiresIn Int      @default(0) @map("expires_in")
   userId    String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
   @@map("refresh_tokens")
+}
+
+model Tickets {
+  company Companies @relation(fields: [companyId], references: [id])
+
+  id            String   @id @default(uuid())
+  price         Decimal
+  companyId     String
+  purchaseLimit Int
+  deadline      DateTime @default(now())
+
+  UsersTickets UsersTickets?
+  Events       Events?
+
+
+  @@map("tickets")
+}
+
+model UsersTickets {
+  ticket Tickets @relation(fields: [ticketId], references: [id])
+  user   Users   @relation(fields: [userId], references: [id])
+
+  id       String @id @default(uuid())
+  userId   String
+  ticketId String
+  quantity Int
+
+  @@map("users_tickets")
+}
+
+model Events {
+  ticket  Tickets   @relation(fields: [ticketId], references: [id])
+  company Companies @relation(fields: [companyId], references: [id])
+
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  companyId   String
+  ticketId    String   @map("ticket_id")
+  eventDate   DateTime @default(now()) @map("event_date")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  @@map("events")
 }

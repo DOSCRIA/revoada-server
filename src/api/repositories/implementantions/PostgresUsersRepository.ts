@@ -1,7 +1,7 @@
 import { User, Password } from "../../entities/User";
 import { UserRepository } from "../UsersRepository";
 import bcrypt, { compareSync } from 'bcryptjs';
-import { client } from "../../prisma/client";
+import { client } from "../../../../prisma/client";
 
 export class PostgresUsersRepository implements UserRepository {
 

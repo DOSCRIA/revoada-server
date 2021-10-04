@@ -10,6 +10,7 @@
     "typeRoots": ["./src/@types"]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "prisma/client/*.ts"  
   ]
 }

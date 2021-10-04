@@ -26,12 +26,12 @@ export class CreateUserController {
         password,
         phoneNumber
       });
-
+      
       return response.status(201).json(userData);
 
-    } catch (err) {
+    } catch ({ message }) {
 
-      return response.status(400).json(err || 'Unexpected error.')
+      return response.status(400).json(JSON.parse(message) || 'Unexpected error.')
       
     }
 

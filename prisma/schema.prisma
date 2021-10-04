@@ -13,11 +13,6 @@ generator docs {
   output   = "docs"
 }
 
-generator erd {
-  provider = "node node_modules/prisma-erd-generator"
-  output = "schema/prisma-entity-relationship-diagram.svg"
-}
-
 model Users {
   id          String   @id @default(uuid())
   name        String

@@ -4,7 +4,7 @@
   "scripts": {
     "build": "babel src --extensions \".ts,.js\" --out-dir dist --copy-files --no-copy-ignored",
     "dev": "echo Starting the server with web sockets and REST API... && npx tsnd --transpile-only --respawn --trace-warnings --ignore-watch node_modules --ignore-watch prisma src/server.ts",
-    "studio": "npx prisma studio"
+    "start": "echo 🛠 Starting the server in production mode... && node dist/server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",

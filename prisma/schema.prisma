@@ -23,10 +23,23 @@ model Users {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
-  RefreshToken RefreshTokens?
-  usersTickets UsersTickets[]
+  refreshToken   RefreshTokens?
+  usersTickets   UsersTickets[]
+  usersCompanies UsersCompanies[]
 
   @@map("users")
+}
+
+model RefreshTokens {
+  id        String   @id @default(uuid())
+  expiresIn Int?     @map("expires_in")
+  userId    String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
 }
 
 model Companies {
@@ -37,9 +50,24 @@ model Companies {
   address     String
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
-  events      Events[]
+
+  events         Events[]
+  usersCompanies UsersCompanies[]
 
   @@map("companies")
+}
+
+model UsersCompanies {
+  id        String   @id @default(uuid())
+  userId    String
+  companyId String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  user    Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("users_companies")
 }
 
 model Events {
@@ -57,18 +85,6 @@ model Events {
   @@map("events")
 }
 
-model RefreshTokens {
-  id        String   @id @default(uuid())
-  expiresIn Int      @default(0) @map("expires_in")
-  userId    String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-
-  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("refresh_tokens")
-}
-
 model Tickets {
   id            String   @id @default(uuid())
   price         Decimal
@@ -83,13 +99,13 @@ model Tickets {
 }
 
 model UsersTickets {
-  ticket Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   id       String @id @default(uuid())
   userId   String
   ticketId String
   quantity Int
+
+  ticket Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("users_tickets")
 }

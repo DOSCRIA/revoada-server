@@ -4,11 +4,11 @@ import { CreateUserDTO } from "./CreateUserDTO";
 
 export class CreateUserUseCase {
 
-  constructor (
+  constructor(
     private userRepository: UserRepository,
-  ) {}
+  ) { }
 
-  async execute (data: CreateUserDTO) {
+  async execute(data: CreateUserDTO) {
 
 
     /**

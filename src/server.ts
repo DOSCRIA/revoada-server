@@ -1,21 +1,26 @@
-import { Server } from "socket.io";
-import { app } from "./api";
-import { router } from "./api/routes";
 import http from 'http';
+
+import { app } from "./api";
+import { WebSockets } from "./websockets";
 
 const port = process.env.API_PORT;
 
-const server = http.createServer(app);
+/**
+ * Create the http server
+ */
+const httpServer = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  }
-});
+/**
+ * Create and start the websockets
+ */
+const websockets = new WebSockets({ server: httpServer });
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-});
+/**
+ * Start websockets server connection
+ */
+websockets.start();
 
-server.listen(port, () => console.log(`🔥🔥🔥 Server listening on port: ${port}`));
-app.use(router);
+/**
+ * Start the server
+ */
+httpServer.listen(port, () => console.log(`🔥🔥🔥 Server listening on port: ${port}`));

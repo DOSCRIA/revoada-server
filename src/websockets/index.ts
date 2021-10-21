@@ -1,8 +1,10 @@
 import { Server } from "socket.io";
+import { Helpers } from "./helpers";
 
 export class WebSockets {
 
   private server: any;
+  private helpers = new Helpers();
 
   constructor(props) {
 
@@ -12,7 +14,6 @@ export class WebSockets {
     this.server = props.server;
 
   }
-
 
   /**
    * Start the web sockets server
@@ -32,11 +33,20 @@ export class WebSockets {
      * When user connects
      */
     io.on('connection', (socket) => {
+
       console.log('a user connected', socket.id);
+
+      // const a = this.helpers.users.get('a');
+
+      // this.helpers.users.set('a', {
+      //   sockets:  [socket.id]
+      // });
+
+      // console.log(a);
+      // console.log(this.helpers.users)
       // io.to(socket.id).emit("test", 'testandooo'); <--- send to a specific user
     });
 
   }
-
 
 }

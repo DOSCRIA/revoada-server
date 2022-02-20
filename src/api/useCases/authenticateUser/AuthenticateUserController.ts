@@ -3,28 +3,32 @@ import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 export class AuthenticateUserController {
 
-  constructor (
+  constructor(
     private authenticateUserUseCase: AuthenticateUserUseCase
-  ){}
+  ) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
 
-    const { 
+    const {
       email,
       password
     } = request.body;
 
     try {
 
+      if (!email) throw new Error('You need to inform your name!');
+
+      if (!password) throw new Error('You need to inform your name!');
+
       const userData = await this.authenticateUserUseCase.execute({
-        email, 
+        email,
         password
       });
 
       return response.status(201).json(userData);
 
     } catch ({ message }) {
-      return response.status(400).json(JSON.parse(message) || 'Unexpected error.')
+      return response.status(400).json(message || 'Unexpected error.')
     }
 
   }

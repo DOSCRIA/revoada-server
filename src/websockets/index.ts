@@ -25,7 +25,7 @@ export class WebSockets {
      */
     const io = new Server(this.server, {
       cors: {
-        origin: process.env.HTTP_ORIGIN_DEV,
+        origin: process.env.HTTP_CORS_ORIGIN,
       }
     });
 

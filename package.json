@@ -2,22 +2,19 @@
   "name": "revoada-server",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel src --extensions \".ts,.js\" --out-dir dist --copy-files --no-copy-ignored",
+    "build": "yarn tsc",
     "dev": "echo Starting the server with web sockets and REST API... && npx tsnd --transpile-only --respawn --trace-warnings --ignore-watch node_modules --ignore-watch prisma src/server.ts",
     "start": "echo 🛠 Starting the server in production mode... && node dist/server.js"
   },
+  "prisma": {
+    "seed": "tsnd prisma/seeds/index.ts"
+  },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.5",
-    "@babel/node": "^7.15.4",
-    "@babel/preset-env": "^7.15.6",
-    "@babel/preset-typescript": "^7.15.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/nodemailer": "^6.4.4",
     "@types/uuid": "^8.3.1",
-    "babel-plugin-module-resolver": "^4.1.0",
     "prisma": "^3.3.0",
     "prisma-docs-generator": "^0.5.0",
     "prisma-erd-generator": "^0.3.6",

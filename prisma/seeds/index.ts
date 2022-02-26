@@ -1,5 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import { Users } from "./users";
-import { prisma } from "./../client"
+
+const prisma = new PrismaClient();
 
 async function seeding(): Promise<void> {
 

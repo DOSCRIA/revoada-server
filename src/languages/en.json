@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "errors": {
+      "dto": {
+        "name": "You forgot to inform your name!",
+        "lastName": "You forgot to inform your last name!",
+        "email": "You need to inform your email!",
+        "isEmail": "This looks like is not a valid email.",
+        "password": "You need to inform your password!",
+        "phoneNumber": "You need to inform your phone number!",
+        "document": "You forgot to inform your document!",
+        "country": "Your country need be informed.",
+        "region": "Your state need be informed.!",
+        "city": "Your city need be informed.",
+        "neighborhood": "Your neighborhood need be informed.",
+        "address": "Your address need be informed.",
+        "addressZipCode": "Your address zip code need be informed.",
+        "types": "The {{ field }} field is not a valid type!"
+      }
+    }
+  }
+}

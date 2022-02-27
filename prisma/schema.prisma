@@ -4,10 +4,7 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  engineType    = "library"
-  binaryTargets = ["native"]
-  output        = "./client"
+  provider = "prisma-client-js"
 }
 
 generator docs {
@@ -16,22 +13,25 @@ generator docs {
 }
 
 model Users {
-  id           String    @id @default(uuid())
-  name         String
-  lastName     String    @map("last_name")
-  email        String    @unique
-  password     String    @unique
-  phoneNumber  Int       @map("phone_number")
-  country      String
-  region       String
-  city         String
-  neighborhood String
-  address      String
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @default(now()) @map("updated_at")
-  deletedAt    DateTime? @map("deleted_at")
+  id             String    @id @default(uuid())
+  name           String
+  lastName       String    @map("last_name")
+  email          String    @unique
+  password       String    @unique
+  phoneNumber    String    @map("phone_number")
+  document       String    @unique
+  country        String
+  region         String
+  city           String
+  neighborhood   String
+  address        String
+  addressZipCode String    @map("address_zip_code")
+  addressHome    String?   @map("address_home")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime? @map("updated_at")
+  deletedAt      DateTime? @map("deleted_at")
 
-  userToken    UsersTokens?
+  userToken    UsersTokens[]
   usersTicket  UsersTickets[]
   usersCompany UsersCompanies[]
   userLogin    UsersLogins[]
@@ -41,10 +41,10 @@ model Users {
 
 model UsersTokens {
   id        String    @id @default(uuid())
-  userId    String    @unique
+  userId    String
   expiresAt Int       @map("expires_at")
   createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @default(now()) @map("updated_at")
+  updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -59,7 +59,7 @@ model UsersLogins {
   platform  String
   location  String?
   createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @default(now()) @map("updated_at")
+  updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -74,7 +74,7 @@ model Companies {
   phoneNumber String    @map("phone_number")
   address     String
   createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @map("updated_at")
+  updatedAt   DateTime? @map("updated_at")
   deletedAt   DateTime? @map("deleted_at")
 
   events      Events[]
@@ -88,7 +88,7 @@ model UsersCompanies {
   userId    String
   companyId String
   createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @default(now()) @map("updated_at")
+  updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
   user    Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -104,7 +104,7 @@ model Events {
   companyId   String
   eventDate   DateTime  @default(now()) @map("event_date")
   createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @map("updated_at")
+  updatedAt   DateTime? @map("updated_at")
   deletedAt   DateTime? @map("deleted_at")
 
   company     Companies       @relation(fields: [companyId], references: [id], onDelete: Cascade)
@@ -120,7 +120,7 @@ model Tickets {
   price       Decimal
   deadline    DateTime  @default(now())
   createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @map("updated_at")
+  updatedAt   DateTime? @map("updated_at")
   deletedAt   DateTime? @map("deleted_at")
 
   userTicket  UsersTickets[]
@@ -135,7 +135,7 @@ model EventsTickets {
   ticketId  String
   quantity  Int
   createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @default(now()) @map("updated_at")
+  updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
   event  Events  @relation(fields: [eventId], references: [id], onDelete: Cascade)
@@ -150,7 +150,7 @@ model UsersTickets {
   ticketId  String
   quantity  Int
   createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @default(now()) @map("updated_at")
+  updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
   ticket Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)

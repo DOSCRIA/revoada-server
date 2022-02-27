@@ -1,0 +1,24 @@
+{
+	"auth": {
+		"errors": {
+			"dto": {
+				"address": "Seu endereço precisa ser informado.",
+				"addressZipCode": "O CEP do seu endereço precisa ser informado.",
+				"city": "Sua cidade precisa ser informada.",
+				"country": "Seu país precisa ser informado.",
+				"document": "Você esqueceu de informar seu documento!",
+				"email": "Você precisa informar seu e-mail!",
+				"isEmail": "Parece que não é um e-mail válido.",
+				"lastName": "Você esqueceu de informar seu sobrenome!",
+				"name": "Você esqueceu de informar seu nome!",
+				"neighborhood": "Seu bairro precisa ser informado.",
+				"password": "Você precisa informar sua senha!",
+				"phoneNumber": "Você precisa informar seu número de telefone!",
+				"region": "Seu estado precisa ser informado.!",
+				"types": "O campo {{field}} não é um tipo válido!"
+			}
+		}
+	},
+	"auth.errors.dto.types": "auth.errors.dto.types",
+	"auth.errors.dto.name": "auth.errors.dto.name"
+}

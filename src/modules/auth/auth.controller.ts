@@ -1,5 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
-import { i18n } from 'src/helpers/internationalization';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 
